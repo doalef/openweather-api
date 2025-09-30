@@ -26,6 +26,8 @@
 		"pg": "^8.11.3",
 		"redis": "^4.7.1",
 		"reflect-metadata": "^0.1.13",
+		"swagger-jsdoc": "^6.2.8",
+		"swagger-ui-express": "^5.0.1",
 		"typeorm": "^0.3.17"
 	},
 	"devDependencies": {
@@ -38,6 +40,8 @@
 		"@types/jsonwebtoken": "^9.0.3",
 		"@types/node": "^20.8.6",
 		"@types/redis": "^4.0.11",
+		"@types/swagger-jsdoc": "^6.0.4",
+		"@types/swagger-ui-express": "^4.1.8",
 		"devmoji": "^2.3.0",
 		"husky": "^9.1.7",
 		"typescript": "^5.2.2"
