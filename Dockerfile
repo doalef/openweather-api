@@ -1,6 +1,6 @@
 FROM node:alpine
 
-WORKDIR /app
+WORKDIR /src
 
 COPY package*.json ./
 
@@ -10,4 +10,6 @@ COPY . .
 
 EXPOSE 3000
 
-CMD [ "npm", "run", "dev" ]
+RUN npm run build:swc
+
+CMD [ "npm", "run", "start" ]
