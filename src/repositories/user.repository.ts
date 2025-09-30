@@ -1,7 +1,6 @@
 import { Repository, Like, FindManyOptions } from "typeorm";
 import { AppDataSource } from "../config/database";
 import { User } from "../entities/user.entity";
-import { UpdateUserDto } from "../dto/user.dto";
 import { JwtHelperClass } from "../helpers/jwt";
 
 export class UserRepository {
@@ -10,7 +9,7 @@ export class UserRepository {
 
 	constructor() {
 		this.repository = AppDataSource.getRepository(User);
-		this.jwtHelper = new JwtHelperClass()
+		this.jwtHelper = new JwtHelperClass();
 	}
 
 	async findAll(): Promise<{ users: User[]; total: number }> {
@@ -43,7 +42,7 @@ export class UserRepository {
 	}
 
 	async update(id: string, userData: Partial<User>): Promise<User | null> {
-    await this.repository.update(id, userData);
-    return this.findById(id);
-  }
+		await this.repository.update(id, userData);
+		return this.findById(id);
+	}
 }
