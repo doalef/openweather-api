@@ -3,6 +3,8 @@ import { CurrentWeatherRepository } from "../repositories/currentWeather.reposit
 import { CurrentWeather } from "../entities/currentWeather.entity";
 import { isUUID } from "class-validator";
 import { AppError } from "../utils/appError";
+import { Cacheable, CacheEvict } from "../decorators/cache.decorator";
+import { CacheKeys } from "../utils/cacheKeys";
 
 export class CurrentWeatherService {
 	private weatherRepository: CurrentWeatherRepository;
@@ -29,6 +31,9 @@ export class CurrentWeatherService {
 		};
 	}
 
+	@Cacheable((id: string) => {
+		return CacheKeys.weatherCurrentById(id);
+	}, 600)
 	async getById(id: string): Promise<{ weatherData: CurrentWeather | null }> {
 		if (!isUUID(id)) throw new AppError("Invalid id", 400);
 		const result = await this.weatherRepository.findById(id);
@@ -38,6 +43,7 @@ export class CurrentWeatherService {
 		};
 	}
 
+	@CacheEvict((id: string) => [CacheKeys.weatherCurrentById(id)])
 	async updateWeather(
 		id: string,
 		weatherUpdate: WeatherUpdateDto
@@ -52,9 +58,8 @@ export class CurrentWeatherService {
 		return { weatherData: result };
 	}
 
-	async deleteWeather(
-		id: string
-	): Promise<boolean> {
+	@CacheEvict((id: string) => [CacheKeys.weatherCurrentById(id)])
+	async deleteWeather(id: string): Promise<boolean> {
 		if (!isUUID(id)) throw new AppError("Invalid id", 400);
 		const exists = this.weatherRepository.exists(id);
 

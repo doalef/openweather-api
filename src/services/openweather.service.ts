@@ -9,6 +9,8 @@ import {
 	GeoResponseDto,
 } from "../dto/weather.dto";
 import { AppError } from "../utils/appError";
+import { Cacheable } from "../decorators/cache.decorator";
+import { CacheKeys } from "../utils/cacheKeys";
 
 export class WeatherService {
 	private client: AxiosInstance;
@@ -99,7 +101,9 @@ export class WeatherService {
 			throw new AppError("Weather service configuration error", 500);
 		}
 	}
-
+	@Cacheable((city: string, country: string) => {
+		return CacheKeys.cityCoordinates(city, country);
+	}, 6000)
 	async getGeolocation(
 		city: string,
 		country: string
@@ -125,6 +129,9 @@ export class WeatherService {
 		}
 	}
 
+	@Cacheable((lat: number, lon: number) => {
+		return CacheKeys.weatherCurrentByCoords(lat, lon);
+	}, 600)
 	async getCurrentWeather(
 		lat: number,
 		lon: number
