@@ -35,31 +35,8 @@ export class CacheKeys {
 		}`;
 	}
 
-	// User-specific cache keys
-	static userWeather(userId: number, city: string): string {
-		return `user:${userId}:weather:${city.toLowerCase()}`;
-	}
-
-	static userPreferences(userId: number): string {
-		return `user:${userId}:preferences`;
-	}
-
 	// API rate limiting
 	static apiRateLimit(apiName: string, identifier: string): string {
 		return `rate_limit:${apiName}:${identifier}`;
-	}
-
-	// Weather statistics
-	static weatherStats(city: string, days: number): string {
-		return `weather:stats:${city.toLowerCase()}:${days}days`;
-	}
-
-	// Pattern for bulk deletion
-	static weatherPattern(city?: string): string {
-		return city ? `weather:*${city.toLowerCase()}*` : "weather:*";
-	}
-
-	static userPattern(userId: number): string {
-		return `user:${userId}:*`;
 	}
 }
