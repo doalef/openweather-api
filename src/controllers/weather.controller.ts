@@ -1,12 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import { validateDto } from "../middlewares/validation.middleware";
 import { AuthenticatedRequest } from "../middlewares/auth.middleware";
-import { AddWeatherDataDto } from "../dto/weather.dto";
+import { AddWeatherDataDto, WeatherUpdateDto } from "../dto/weather.dto";
 import { weatherService } from "../services/openweather.service";
 import { currentWeatherService } from "../services/currentWeather.service";
+import { AppError } from "../utils/appError";
 
 export class WeatherController {
 	public validateAddWeather = validateDto(AddWeatherDataDto);
+	public validateUpdateWeather = validateDto(WeatherUpdateDto);
 
 	addWeather = async (
 		req: Request,
@@ -45,11 +47,76 @@ export class WeatherController {
 	): Promise<void> => {
 		try {
 			const result = await currentWeatherService.getAll();
-			console.log(result)
+			console.log(result);
 			res.status(200).json({
 				success: true,
 				data: result,
 				message: "",
+			});
+		} catch (error) {
+			next(error);
+		}
+	};
+
+	getWeather = async (
+		req: Request,
+		res: Response,
+		next: NextFunction
+	): Promise<void> => {
+		try {
+			const { id } = req.params;
+			const result = await currentWeatherService.getById(id);
+
+			if (!result.weatherData)
+				throw new AppError("Weather data was not found", 404);
+
+			res.status(200).json({
+				success: true,
+				data: result,
+				message: "",
+			});
+		} catch (error) {
+			next(error);
+		}
+	};
+
+	updateWeather = async (
+		req: Request,
+		res: Response,
+		next: NextFunction
+	): Promise<void> => {
+		try {
+			const { id } = req.params;
+			const result = await currentWeatherService.updateWeather(
+				id,
+				req.body as WeatherUpdateDto
+			);
+
+			if (!result.weatherData)
+				throw new AppError("Weather data was not found", 404);
+
+			res.status(200).json({
+				success: true,
+				data: result,
+				message: "",
+			});
+		} catch (error) {
+			next(error);
+		}
+	};
+
+	deleteWeather = async (
+		req: Request,
+		res: Response,
+		next: NextFunction
+	): Promise<void> => {
+		try {
+			const { id } = req.params;
+			const result = await currentWeatherService.deleteWeather(id);
+
+			res.status(200).json({
+				success: true,
+				message: "weather data deleted",
 			});
 		} catch (error) {
 			next(error);

@@ -213,3 +213,43 @@ export class AddWeatherDataDto {
 	@IsString()
 	country!: string;
 }
+
+export class WeatherUpdateDto {
+	@IsOptional()
+	@IsString()
+	main?: string;
+	@IsOptional()
+	@IsString()
+	description?: string;
+
+	@IsOptional()
+	@IsNumber()
+	temperature?: number;
+	@IsOptional()
+	@IsNumber()
+	feelsLike?: number;
+	@IsOptional()
+	@IsNumber()
+	minTemperature?: number;
+	@IsOptional()
+	@IsNumber()
+	maxTemperature?: number;
+
+	@IsOptional()
+	@IsNumber()
+	clouds?: number;
+
+	@IsOptional()
+	@IsNumber()
+	pressure?: number;
+	@IsOptional()
+	@IsNumber()
+	humidity?: number;
+
+	@IsOptional()
+	@IsNumber()
+	windSpeed?: number;
+	@IsOptional()
+	@IsNumber()
+	windDirection?: number;
+}

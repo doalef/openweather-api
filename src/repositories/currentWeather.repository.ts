@@ -43,4 +43,9 @@ export class CurrentWeatherRepository {
 		await this.repository.update(id, userData);
 		return this.findById(id);
 	}
+
+	async delete(id: string): Promise<boolean> {
+		const result = await this.repository.delete(id);
+		return !!(result.affected && result.affected > 0);
+	}
 }
