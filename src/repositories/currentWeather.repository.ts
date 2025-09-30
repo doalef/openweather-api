@@ -48,4 +48,15 @@ export class CurrentWeatherRepository {
 		const result = await this.repository.delete(id);
 		return !!(result.affected && result.affected > 0);
 	}
+
+	async findLatestByCity(
+		city: string
+	): Promise<CurrentWeather | null> {
+		const query = this.repository
+			.createQueryBuilder("current_weather_data")
+			.where("LOWER(current_weather_data.cityName) = LOWER(:city)", { city })
+			.orderBy("current_weather_data.updatedAt", "DESC");
+
+		return query.getOne();
+	}
 }

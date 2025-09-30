@@ -5,6 +5,7 @@ import { authenticate } from "../middlewares/auth.middleware";
 const router = Router();
 
 router.get("/:id", weatherController.getWeather);
+router.get("/latest/:city", weatherController.getLatestByCity);
 router.get("/", weatherController.getAllWeather);
 router.post(
 	"/",

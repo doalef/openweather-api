@@ -69,6 +69,17 @@ export class CurrentWeatherService {
 
 		return result;
 	}
+
+	async getLatestByCity(
+		city: string
+	): Promise<{ weatherData: CurrentWeather }> {
+		let result = await this.weatherRepository.findLatestByCity(city);
+
+		if (!result)
+			throw new AppError(`No weather records found for ${city}`, 404);
+
+		return { weatherData: result };
+	}
 }
 
 export const currentWeatherService = new CurrentWeatherService();

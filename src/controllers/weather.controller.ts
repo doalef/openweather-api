@@ -122,6 +122,25 @@ export class WeatherController {
 			next(error);
 		}
 	};
+
+	getLatestByCity = async (
+		req: Request,
+		res: Response,
+		next: NextFunction
+	): Promise<void> => {
+		try {
+			const { city } = req.params;
+			const result = await currentWeatherService.getLatestByCity(city);
+
+			res.status(200).json({
+				success: true,
+				data: result,
+				message: "",
+			});
+		} catch (error) {
+			next(error);
+		}
+	};
 }
 
 export const weatherController = new WeatherController();
