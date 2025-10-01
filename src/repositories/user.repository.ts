@@ -1,5 +1,5 @@
 import { Repository, Like, FindManyOptions } from "typeorm";
-import { AppDataSource } from "../config/database";
+import AppDataSource from "../config/database";
 import { User } from "../entities/user.entity";
 import { JwtHelperClass } from "../helpers/jwt";
 

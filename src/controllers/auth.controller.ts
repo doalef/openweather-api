@@ -9,6 +9,7 @@ import {
 	ResetPasswordDto,
 } from "../dto/auth.dto";
 import { AuthenticatedRequest } from "../middlewares/auth.middleware";
+import { AppError } from "../utils/appError";
 
 export class AuthController {
 	public validateLogin = validateDto(LoginDto);
@@ -25,7 +26,7 @@ export class AuthController {
 		try {
 			const result = await authService.register(req.body);
 
-			res.status(201).json({
+			res.status(200).json({
 				success: true,
 				data: result,
 				message: "User registered successfully",
@@ -62,7 +63,7 @@ export class AuthController {
 			const { refreshToken } = req.body;
 
 			if (!refreshToken) {
-				throw new Error("Refresh token is required");
+				throw new AppError("Refresh token is required", 401);
 			}
 
 			const result = await authService.refreshToken(refreshToken);
@@ -84,7 +85,7 @@ export class AuthController {
 	): Promise<void> => {
 		try {
 			if (!req.user) {
-				throw new Error("User not authenticated");
+				throw new AppError("User not authenticated", 401);
 			}
 
 			const result = await authService.changePassword(
@@ -109,7 +110,7 @@ export class AuthController {
 	): Promise<void> => {
 		try {
 			if (!req.user) {
-				throw new Error("User not authenticated");
+				throw new AppError("User not authenticated", 401);
 			}
 
 			const user = await authService.getCurrentUser(req.user.userId);

@@ -64,6 +64,7 @@ export class AuthService {
 				email: user.email,
 			},
 			token: accessToken.token,
+			refreshToken: refreshToken.token,
 			expiresIn: accessToken.expiresIn,
 		};
 	}
@@ -95,7 +96,6 @@ export class AuthService {
 		const accessToken = this.jwtService.generateAccessToken(tokenPayload);
 		const refreshToken = this.jwtService.generateRefreshToken(tokenPayload);
 
-		// Update user with refresh token and last login
 		await this.userRepository.update(user.id, {
 			refreshToken: refreshToken.token,
 		});
@@ -107,6 +107,7 @@ export class AuthService {
 				email: user.email,
 			},
 			token: accessToken.token,
+			refreshToken: refreshToken.token,
 			expiresIn: accessToken.expiresIn,
 		};
 	}
@@ -152,6 +153,7 @@ export class AuthService {
 				email: user.email,
 			},
 			token: accessToken.token,
+			refreshToken: newRefreshToken.token,
 			expiresIn: accessToken.expiresIn,
 		};
 	}

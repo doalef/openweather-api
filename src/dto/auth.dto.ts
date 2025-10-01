@@ -56,5 +56,6 @@ export class AuthResponseDto {
     email: string;
   };
   token: string;
+  refreshToken: string;
   expiresIn: number;
 }

@@ -112,7 +112,7 @@ export class WeatherController {
 	): Promise<void> => {
 		try {
 			const { id } = req.params;
-			const result = await currentWeatherService.deleteWeather(id);
+			await currentWeatherService.deleteWeather(id);
 
 			res.status(200).json({
 				success: true,

@@ -1,5 +1,5 @@
-import { Repository, Like, FindManyOptions } from "typeorm";
-import { AppDataSource } from "../config/database";
+import { Repository, FindManyOptions } from "typeorm";
+import AppDataSource from "../config/database";
 import { CurrentWeather } from "../entities/currentWeather.entity";
 
 export class CurrentWeatherRepository {
@@ -56,6 +56,7 @@ export class CurrentWeatherRepository {
 			.createQueryBuilder("current_weather_data")
 			.where("LOWER(current_weather_data.cityName) = LOWER(:city)", { city })
 			.orderBy("current_weather_data.updatedAt", "DESC");
+			``
 
 		return query.getOne();
 	}
