@@ -21,16 +21,16 @@ services:
     ports:
       - "6379:6379"
 
-  # app:
-  #   build: .
-  #   restart: unless-stopped
-  #   container_name: nodejs-app-container
-  #   depends_on:
-  #     - postgres
-  #     - redis
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - .:/app
+  app:
+    build: .
+    restart: unless-stopped
+    container_name: nodejs-app-container
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
 volumes:
   postgres_17_data:

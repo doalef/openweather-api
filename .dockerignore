@@ -1,0 +1,30 @@
+# Node.js specific files and directories
+node_modules/
+npm-debug.log
+.DS_Store
+
+# Git specific files and directories
+.git
+.gitignore
+
+# Editor and IDE specific files
+.vscode/
+.idea/
+
+# Build artifacts and temporary files
+build/
+dist/
+tmp/
+*.log
+*.tmp
+
+# Test related files (if not needed in production image)
+test/
+tests/
+*.spec.js
+*.test.js
+
+# Documentation (if not needed in production image)
+docs/
+README.md
+LICENSE
