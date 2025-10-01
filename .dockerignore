@@ -23,6 +23,7 @@ test/
 tests/
 *.spec.js
 *.test.js
+.test.env
 
 # Documentation (if not needed in production image)
 docs/

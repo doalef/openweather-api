@@ -7,7 +7,9 @@ import { errorHandler } from "./middlewares/error.middleware";
 import { weatherRoutes } from "./routers/weather.route";
 import { setupSwagger } from "./swagger";
 
-dotenv.config();
+dotenv.config({
+	path: process.env.NODE_ENV === "test" ? ".env.test" : ".env",
+});
 const app = express();
 const port = process.env.PORT || 3000;
 
