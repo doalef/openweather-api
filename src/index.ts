@@ -17,11 +17,18 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/weather", weatherRoutes);
 
-// Setup Swagger
 setupSwagger(app);
 
 // Error handling
 app.use(errorHandler);
+
+// 404 Handler
+app.use("*", (req, res) => {
+	res.status(404).json({
+		success: false,
+		message: `Route ${req.originalUrl} not found`,
+	});
+});
 
 AppDataSource.initialize()
 	.then(() => {
