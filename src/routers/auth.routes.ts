@@ -4,7 +4,6 @@ import { authenticate } from "../middlewares/auth.middleware";
 
 const router = Router();
 
-// Public routes
 router.post(
 	"/register",
 	authController.validateRegister,
@@ -15,7 +14,6 @@ router.post("/login", authController.validateLogin, authController.login);
 
 router.post("/refresh-token", authController.refreshToken);
 
-// Protected routes
 router.post(
 	"/change-password",
 	authenticate,
