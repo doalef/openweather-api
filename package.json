@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"watch": "tsc -w",
-		"dev": "cross-env NODE_ENV=test nodemon build/index.js",
+		"dev": "cross-env NODE_ENV=development nodemon build/index.js",
 		"build:swc": "swc src --out-dir dist",
 		"start": "node dist/src/index.js",
 		"build:lib": "tsc",
