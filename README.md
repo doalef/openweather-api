@@ -1,6 +1,9 @@
 # OpenWeather API
 
+**GITHUB:** https://github.com/doalef/openweather-api
+
 **LIVE VERSION:** https://weatherapi.liara.run/
+
 **API DOCUMENTAION:** https://weatherapi.liara.run/api-docs
 
 ## Quick Deployment:
@@ -73,3 +76,9 @@ The weather object will also be cached for a while to prevent redundant data bei
 You can checkout when the caching system comes into play by observing the application logs, the application logs every time a cache eviction, cache hit, or cache miss occurs.
 
 You can find out more about each API by going through the [API Documentation.](https://weatherapi.liara.run/api-docs) 
+
+### Development
+Create a `.env` file for development, then run the following commands:
+`npm run watch`
+then:
+`npm run dev`
